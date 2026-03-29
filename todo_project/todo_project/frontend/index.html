@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo App</title>
+</head>
+<body>
+
+<h1>Todo List</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="title" placeholder="Enter task">
+    <button type="submit">Add</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li>
+            {{ task.title }}
+
+            {% if not task.completed %}
+                <a href="/complete/{{ task.id }}">✔</a>
+            {% endif %}
+
+            <a href="/delete/{{ task.id }}">❌</a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
